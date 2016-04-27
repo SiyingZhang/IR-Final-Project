@@ -1,9 +1,9 @@
-package edu.pitt.bean;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package model;
 
 /**
  *
@@ -12,13 +12,13 @@ package edu.pitt.bean;
 public class WebDocument {
 
     private long DocNo;
-    //private String DocTitle;
+    private String DocTitle;
     private String DocLink;
     private String DocContent;
 
-    public WebDocument(long DocNo, String DocLink, String DocContent) {
+    public WebDocument(long DocNo, String DocTitle, String DocLink, String DocContent) {
         this.DocNo = DocNo;
-        //this.DocTitle = DocTitle;
+        this.DocTitle = DocTitle;
         this.DocLink = DocLink;
         this.DocContent = DocContent;
     }
@@ -28,7 +28,7 @@ public class WebDocument {
         this.DocLink = DocLink;
         this.DocContent = DocContent;
         this.DocNo = 0;
-       // this.DocTitle = "no title";
+        this.DocTitle = "no title";
     }
 
     public WebDocument() {
@@ -50,7 +50,7 @@ public class WebDocument {
     public void setDocNo(long DocNo) {
         this.DocNo = DocNo;
     }
-    /*
+
     public String getDocTitle() {
         return DocTitle;
     }
@@ -58,7 +58,7 @@ public class WebDocument {
     public void setDocTitle(String DocTitle) {
         this.DocTitle = DocTitle;
     }
-     */
+
     public String getDocLink() {
         return DocLink;
     }

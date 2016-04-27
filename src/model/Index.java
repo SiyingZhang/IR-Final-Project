@@ -1,9 +1,10 @@
-package edu.pitt.buildindex;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package model;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,9 +21,6 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-import edu.pitt.bean.WebDocument;
-import Classes.Path;
-
 /**
  *
  * @author Zhirun Tian
@@ -38,7 +36,6 @@ public class Index {
         indexWriterConfig.setOpenMode(OpenMode.CREATE_OR_APPEND);
         Directory directory = null;
         IndexWriter indexWrite = null;
-        long startTime = System.currentTimeMillis();
         try {
             //set path of the original data
             directory = FSDirectory.open(new File(Path.IndexDir));
@@ -65,9 +62,8 @@ public class Index {
                 e.printStackTrace();
             }
         }
-        long endTime = System.currentTimeMillis();
-        System.out.println("=== Building index takes " + (endTime-startTime)/60000.0 + " min.");
-        //commit the data, if not, it would not be saved
+
+        //commit the data, if not , it would not be saved
         try {
             indexWrite.commit();
             //close the resource

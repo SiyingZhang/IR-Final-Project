@@ -1,15 +1,16 @@
-package edu.pitt.bean;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package model;
 
 /**
  *
  * @author Zhirun Tian
  */
 public class Card {
+
     private String Name;
     private String Network;
     private String Issuer;
@@ -24,6 +25,24 @@ public class Card {
         this.bouns = bouns;
         this.difficulty = difficulty;
         this.path = path;
+    }
+
+    public Card(String Name, String Network, String Issuer, double bouns, double difficulty) {
+        this.Name = Name;
+        this.Network = Network;
+        this.Issuer = Issuer;
+        this.bouns = bouns;
+        this.difficulty = difficulty;
+        this.path = "a fake path";
+    }
+
+    public Card() {
+        this.Name = "null";
+        this.Network = "null";
+        this.Issuer = "null";
+        this.bouns = 0;
+        this.difficulty = 0;
+        this.path = "a fake path";
     }
 
     public String getPath() {
@@ -73,7 +92,5 @@ public class Card {
     public void setDifficulty(double difficulty) {
         this.difficulty = difficulty;
     }
-    
-    
-    
+
 }

@@ -54,10 +54,10 @@
 						<p class="subtitle">CREDIT SCORE</p>
 						<span class="custom-dropdown big">
 						    <select name="credit_score" class="select-box">   
-						        <option>Excellent (720-850)</option>
-						        <option>Good (690-719)</option>  
-						        <option>Average (630-689)</option>
-						        <option>Poor (350-629)</option>
+						        <option value="8">Excellent (720-850)</option>
+						        <option value="6">Good (690-719)</option>  
+						        <option value="4">Average (630-689)</option>
+						        <option value="2">Poor (350-629)</option>
 						    </select>
 						</span>
 					</div>
@@ -65,12 +65,12 @@
 						<p class="subtitle">MONTHLY SPEND</p>
 						<span class="custom-dropdown big">
 						    <select name="monthly_spend" class="select-box">    
-						        <option>$200 - $500</option>
-						        <option>$501 - $800</option>  
-						        <option>$801 - $1200</option>
-						        <option>$1201 - $1700</option>
-						        <option>$1701 - $2000</option>
-						        <option>$2001 - $5000</option>
+						        <option value="1">$200 - $500</option>
+						        <option value="2">$501 - $800</option>  
+						        <option value="3">$801 - $1200</option>
+						        <option value="5">$1201 - $1700</option>
+						        <option value="7">$1701 - $2000</option>
+						        <option value="10">$2001 - $5000</option>
 						    </select>
 						</span>
 					</div>
@@ -83,10 +83,9 @@
 						<p class="subtitle">NETWORK</p>
 						<span class="custom-dropdown big">
 						    <select name="network" class="select-box">    
-						        <option>American Express</option>
-						        <option>Discover</option>
-						        <option>Visa</option>
-						        <option>MasterCard</option>
+						        <option value="AE">American Express</option>
+						        <option value="Visa">Visa</option>
+						        <option value="Master">MasterCard</option>
 						    </select>
 						</span>
 					</div>
@@ -94,15 +93,12 @@
 						<p class="subtitle">ISSUER</p>
 						<span class="custom-dropdown big">
 						    <select name="issuer" class="select-box">    
-						        <option>American Express</option>
-						        <option>Bank of America</option>  
-						        <option>Barclaycard</option>
-						        <option>Capital One</option>
-						        <option>Chase</option>
-						        <option>Citibank</option>
-						        <option>Discover</option>
-						        <option>Other Banks</option>
-						        <option>U.S. Bank</option>
+						        <option value="AE">American Express</option>
+						        <option value="Dinners Club">Dinners Club</option>  
+						        <option value="CNB">CNB</option>
+						        <option value="Chase">Chase</option>
+						        <option value="Citi">Citibank</option>
+						        <option value="Barclays">Barclays</option>
 						    </select>
 						</span>
 					</div>
