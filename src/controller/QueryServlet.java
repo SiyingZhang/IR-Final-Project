@@ -25,7 +25,7 @@ import org.json.JSONArray;
 @WebServlet("/CardRecommendation")
 public class QueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Map<Integer, WebDocument> map;
+	Map<Integer, Document> map;
       
     /**
      * @see HttpServlet#HttpServlet()
@@ -87,37 +87,41 @@ public class QueryServlet extends HttpServlet {
 		}
 
     	//Get the entire query content, add space between each two
-    	String queryContent = query +" "+ creditScore +" "+ monthSpend +" "+ network +" "+ issuer;
+    	String queryContent = query +" "+ difficulty +" "+ bonus +" "+ network +" "+ issuer;
     	System.out.println("Query is: " + queryText);
     	
-    	request.setAttribute("query", queryText);	//entire query
+    	request.setAttribute("query_text", queryText);	//pass query on result page
     	
     	Combination combination = new Combination();
-        Card cardinfo = new Card("Citi Prestige",  "Master",  "Citi",  6,  5,  "/a fake path");
-        String origQuery = "prestige";
-        combination.ReturnAll(cardinfo, origQuery, 10);
+        Card cardinfo = new Card("",  network,  issuer,  bonus,  difficulty, "/a fake path");
+       
+        combination.ReturnAll(cardinfo, queryContent, 10);
         Card DreamCard = combination.getCard();
+        
+        //Pass card info into result jsp
+        request.setAttribute("bank_name", DreamCard.getIssuer());
+        request.setAttribute("card_name", DreamCard.getNetwork());
+        request.setAttribute("bonus", DreamCard.getBouns());
+        
+        request.setAttribute("path", DreamCard.getPath());
+        
         System.out.println("card info:" + DreamCard.getIssuer() + DreamCard.getName());
+        
         List<Document> docList = combination.getDocList();
+        List<HashMap<String, String>> result = new ArrayList<>();
+        int count = 0;
         
         for(Document doc :docList){
+        	map.put(count++, doc);
+        	
+        	HashMap<String, String> map = new HashMap<>();
+        	map.put("link", doc.get("link"));
+        	map.put("content", doc.get("content"));
             System.out.println("content--\tname:\t" + doc.get("link") + "\tcontent:\t" + doc.get("content"));  
+            
+            result.add(map);
+            
         }
-        
-    	//List<WebDocument> searchResult = search.getSearchResult();
-    	
-    	List<HashMap<String, String>> result = new ArrayList<>();
-    	
-    	int count = 0;
-    	for(WebDocument document : searchResult) {
-    		map.put(count++, document);
-    		
-    		HashMap<String, String> map = new HashMap<>();
-    		map.put("link", document.getDocLink());
-    		map.put("content", document.getDocContent());
-    		
-    		result.add(map);
-    	}
     	
     	JSONArray json = new JSONArray(result);
     	request.setAttribute("result", json.toString());

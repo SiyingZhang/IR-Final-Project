@@ -28,10 +28,10 @@
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<%
-		String text = (String)request.getAttribute("queryText");
-		String bankName = "Citi Bank";
-		String cardName = "Prestige";
-		String bonus = "Airplane lounge";				
+		String queryText = (String)request.getAttribute("query_text");
+		String bankName = (String)request.getAttribute("bank_name");
+		String cardName = (String)request.getAttribute("card_name");
+		String bonus = (String)request.getAttribute("bonus");				
 	%>
 </head>
 	
@@ -45,7 +45,7 @@
 		<div class="heading">
 			<h3>Credit Card Recommendation</h3>
 		</div>
-		<p class="tag">Your Query: </p><p class="text-body"><%=text %>></p>
+		<p class="tag">Your Query: </p><p class="text-body"><%=queryText %>></p>
 		<!-- whole container-->
 		<hr>
 		<div class="one-item">
