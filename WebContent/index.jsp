@@ -25,28 +25,6 @@
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<!-- Get all values from input components -->
-	<%
-	String queryText = (String)request.getAttribute("query_text");
-	if(queryText == null) {
-		queryText = "";
-	}
-	String creditScore = (String)request.getAttribute("credit_score");
-	if(creditScore == null) {
-		creditScore = "";
-	}
-	String monthlySpend = (String)request.getAttribute("monthly_spend");
-	if(monthlySpend == null) {
-		monthlySpend = "";
-	}
-	String network = (String)request.getAttribute("network");
-	if(network == null) {
-		network = "";
-	}
-	String issuer = (String)request.getAttribute("issuer");
-	if(issuer == null) {
-		issuer = "";
-	}
-	%>
 </head>
 	
 <body>
@@ -56,6 +34,7 @@
 			<h1>Find Suitable Credit Card</h1>
 			<h3>Input your requirements below, let us help you to realize your goal.</h3>
 		</div>
+		<!-- Form -->
 		<form action="QueryServlet" method="post">
 		<!-- whole container-->
 		<div class="container-fluid">

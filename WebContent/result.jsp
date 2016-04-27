@@ -28,18 +28,24 @@
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<%
-		String bankName = (String)request.getAttribute("");
-		String cardName = (String)request.getAttribute("");
-		String bonus = (String)request.getAttribute("");
+		String text = (String)request.getAttribute("queryText");
+		String bankName = "Citi Bank";
+		String cardName = "Prestige";
+		String bonus = "Airplane lounge";				
 	%>
 </head>
 	
 <body>
+<%@page import="java.util.HashMap" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List"%>
+<%@page import="org.json.*"%>
 	<div class="main-container">
 		<!-- Heading -->
 		<div class="heading">
 			<h3>Credit Card Recommendation</h3>
 		</div>
+		<p class="tag">Your Query: </p><p class="text-body"><%=text %>></p>
 		<!-- whole container-->
 		<hr>
 		<div class="one-item">
@@ -53,34 +59,23 @@
 			</div>
 		</div>
 		<hr>
-		<!--
-		<div class="one-item">
-			<div class="card-image"><img src="images/ritz_carlton_card.png"></div>
-			<div class="information">
-				<p class="tag">Bank Name: </p> <p class="text-body">Chase</p>
-				<br>
-				<p class="tag">Card Name: </p> <p class="text-body">Ritz-carlton</p>
-				<br>
-				<p class="tag">Bonus: </p> <p class="text-body">Gold elite status  at  Ritz Carlton reward program.</p>
-			</div>
-		</div>
-		<hr>-->
+
 		<div class="link-group">
 			<h4>Related Links</h4>
-			<a href="http://www.flyertalk.com/forum/citi-thankyou-rewards/1735992-citi-prestige-change-concierge-operator-ten-aspire.html" target="_blank">Citi Prestige - change in concierge operator (Ten to Aspire)</a>
-			<br>
-			<a href="http://www.flyertalk.com/forum/citi-thankyou-rewards/1184201-typ-flight-redemptions-prestige-0-0133-0-016-pt-premier-0-0125-pt.html" target="_blank">TYP flight redemptions: Prestige $0.0133 or $0.016/pt., Premier $0.0125/pt.</a>
-			<br>
-			<a href="http://www.flyertalk.com/forum/citi-thankyou-rewards/1632562-citi-aa-platinum-gold-business-cards.html" target="_blank"> Citi AA Platinum, Gold and Business cards</a>
-			<br>
-			<a href="http://www.flyertalk.com/forum/alaska-airlines-mileage-plan/1462859-alaska-airlines-visa.html" target="_blank">Alaska Airlines Visa</a>
-			<br>
-			<a href="http://www.flyertalk.com/forum/intercontinental-hotels-ihg-rewards-club-intercontinental-ambassador/1731896-ihg-accelerate-2016-promotion.html" target="_blank">Citi Prestige Priority Pass Select membership.</a>
-			<br>
-			<a href="http://www.flyertalk.com/forum/luxury-hotels/1704812-luxury-hotels-japan.html" target="_blank">Luxury Hotels of Japan</a>
-			<br>
-			<a href="http://www.flyertalk.com/forum/citi-thankyou-rewards/1612811-changes-citi-card-insurance-11-23-14-5-15-2016-a.html" target="_blank">Changes to Citi card insurance 11/23/14 and 5/15/2016.</a>
-
+			<%
+			if(request.getAttribute("result") != null) {
+				String res = (String)request.getAttribute("result");
+				JSONArray jsonArray = new JSONArray(res);
+				
+				for(int i=0; i<jsonArray.length(); i++) {
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					out.println("----" + (i+1) + "----");
+					//String link = "LINK: " +jsonObject.getString("link");
+					out.println("<a href='"+ jsonObject.getString("link") + "' target='_blank'>" + jsonObject.getString("link")+ "</a>");
+					out.println("<p>"+ "Content: " + jsonObject.getString("content") + "</p>");
+				}
+			}
+			%>
 		</div>
 	</div>
 

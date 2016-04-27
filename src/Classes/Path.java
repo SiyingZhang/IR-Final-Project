@@ -1,16 +1,16 @@
 package Classes;
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Zhirun Tian
+ */
 public class Path {
-	public static String StopwordDir="data//stopword.txt";//address of stopwords.txt
-	public static String ResultHM1="data//result.";//
-	
-	
-	public static String DataWebDir="data//docset.trecweb";//address of docset.trectext
-	public static String DataTextDir="data//docset.trectext";//address of docset.trectext
-	
-	public static String IndexTextDir="data//indextext//";//address of generated Text index file
-	public static String IndexWebDir="data//indexweb//";//address of generated Web index file
-	
-	public static String TopicDir="data//topics.txt";//address of topics.txt
+
+    public static String DataDir = "data//docset.trecweb";//address of docset.trectext
+    public static String IndexDir = "data//testindex//";//address of generated Web index file
 
 }
