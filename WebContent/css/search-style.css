@@ -1,0 +1,222 @@
+html, body{
+    font-size: 100%;
+	background:url(../images/bg.png)no-repeat;
+	background-size: cover;
+	font-family: 'Open Sans', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,a{
+	margin:0;	
+	font-family: 'Raleway', sans-serif;
+}	
+p{
+	margin:0;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover{
+	text-decoration:none;
+}
+/*-- main container --*/
+.main-container{
+	padding:3em 0;
+}
+/*--Heading--*/
+.heading {
+	margin: 0 0 3.5em;
+}
+.heading h1{
+	font-size: 3.5em;
+    text-transform: uppercase;
+    font-weight: 300;
+	text-align:center;
+	color:#fff;
+}
+.heading h1 span {
+    font-weight: 800;
+}
+.heading h3{
+	font-size: 1.5em;
+	text-align: center;
+	font-weight: lighter;
+	font-style: italic;
+	color: #fff;
+}
+/*-- //Heading --*/
+.search-conditions{
+	margin: auto;
+	width: 65%;
+}
+.search-box{
+	overflow: hidden;
+	float: left;
+	width: 80%;
+}
+.search-box input[type="text"]{
+	outline:none;
+	padding:13px 10px;
+	background:#fff;
+	border:none;
+	font-size:14px;
+	color:#999;
+	width:95%;
+	height: 50px;
+	box-shadow: 3px 3px 10px #a77a24;
+	-webkit-box-shadow: 3px 3px 10px #a77a24;
+	-moz-box-shadow: 3px 3px 10px #a77a24;
+	-o-box-shadow: 3px 3px 10px #a77a24;
+	-ms-box-shadow: 3px 3px 10px #a77a24;
+	border-left: 6px solid #7e4826;
+}
+input[type="submit"]{
+	outline:none;
+	border:none;
+	width: 20%;
+	height: 50px;
+	background:#7e4826;
+	color:#fff;
+	font-size: 20px;
+	text-align: center;
+    letter-spacing: 2px;
+    font-family: 'Raleway', sans-serif;
+    padding: 10px 0;
+    float: right;
+    font-weight: 600;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-ms-transition:.5s all;
+	box-shadow: -1px 0px 18px #a77a24;
+	-o-transition:.5s all;
+}
+/*-- Personal Information --*/
+.personal-status{
+	margin: auto;
+	width: 65%;
+	margin-top: 6em;
+	padding-top: 10px;
+}
+.personal-group{
+	height:120px;
+}
+.subtitle{
+	font-size: 1.0em;
+	text-align: left;
+	font-weight: normal;
+	color: #fff;
+}
+.left-dropdown-box{
+	outline: none;
+	border:none;
+	width: 45%;
+	height: 50px;
+	float: left;
+	font-family: 'Raleway', sans-serif;
+    padding: 10px 0;
+}
+.right-dropdown-box{
+	outline: none;
+	border:none;
+	width: 45%;
+	height: 50px;
+	float: right;
+	font-family: 'Raleway', sans-serif;
+    padding: 10px 0;
+}
+.big {
+  font-size: 1.0em;
+}
+hr{
+    border: 0;
+    height: 1px;
+    /*margin-top: 3em;*/
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}
+.select-box{
+	width: 300px;
+	height: 50px;
+}
+/* Custom dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px; /* demo only */
+}
+.custom-dropdown select {
+  background-color: #7e4826;
+  color: #fff;
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em;	
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+}
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.custom-dropdown::after { /*  Custom dropdown arrow */
+  content: "\25BC";
+  height: 1em;
+  font-size: .625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -.5em;
+}
+.custom-dropdown::before { /*  Custom dropdown arrow cover */
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.custom-dropdown select[disabled] {
+  color: rgba(0,0,0,.3);
+}
+
+.custom-dropdown select[disabled]::after {
+  color: rgba(0,0,0,.1);
+}
+
+.custom-dropdown::before {
+  background-color: rgba(0,0,0,.15);
+}
+
+.custom-dropdown::after {
+  color: rgba(0,0,0,.4);
+}
+/*-- Card Information --*/
+.card-information{
+	margin: auto;
+	width: 65%;
+	margin-top: 0.5em;
+}
+/*-- footer --*/
+.footer-bottom{
+	margin:5em 0 0;
+	text-align:center;
+}
+.footer-bottom p{
+	font-size:15px;
+	color:#EBEBEB;
+	margin:0;
+}
+.footer-bottom p a{
+	color:#fff;
+	text-decoration:none;
+	font-family: 'Raleway', sans-serif;
+}
+.footer-bottom p a:hover{
+	color:#4D1313;
+}
+/*-- //footer --*/

@@ -1,0 +1,95 @@
+html, body{
+    font-size: 100%;
+	background:url(../images/result-bg1.jpg)no-repeat;
+	background-size: cover;
+	font-family: 'Open Sans', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,a,p{
+	margin:0;	
+	font-family: 'Raleway', sans-serif;
+	color: white;
+}	
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover{
+	text-decoration:none;
+}
+p{
+	display: inline;
+	line-height: 200%;
+}
+.tag{
+	font-size: 1.1em;
+	font-weight: normal;
+}
+.text-body{
+	font-weight: lighter;
+}
+/*--Heading--*/
+.heading {
+	margin: 0 0 3.5em;
+}
+.heading h3{
+	font-size: 1.6em;
+	text-align: center;
+	font-weight: 700;
+	color: #fff;
+}
+.main-container{
+	padding:3em 0;
+}
+/*-- //Heading --*/
+hr{
+	margin: 5 0 0px;
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}
+/*-- One card item --*/
+.one-item{
+	margin: auto;
+	width: 70%;
+	padding-top: 2em;
+	height: 180px;
+}
+.card-image{
+	overflow: hidden;
+	float: left;
+	width: 20%;
+}
+img{
+	width: 100%;
+}
+.information{
+	float: right;
+	width: 70%;
+}
+.link-group{
+	margin: auto;
+	width: 70%;
+	padding-top: 2em;
+}
+a, h4{
+	line-height: 200%;
+}
+/*-- footer --*/
+.footer-bottom{
+	margin:0 0 1em;
+	text-align:center;
+}
+.footer-bottom p{
+	font-size:15px;
+	color:#EBEBEB;
+	margin:0;
+}
+.footer-bottom p a{
+	color:#fff;
+	text-decoration:none;
+	font-family: 'Raleway', sans-serif;
+}
+.footer-bottom p a:hover{
+	color:#4D1313;
+}
+/*-- //footer --*/
