@@ -5,35 +5,34 @@
  */
 package test;
 
+import java.io.IOException;
 import java.util.List;
+
 import model.*;
+
 import org.apache.lucene.document.Document;
+import org.apache.lucene.queryparser.classic.ParseException;
 
 /**
  *
  * @author Zhirun Tian
  */
 public class Demo {
-    public static void main(String[] args) {  
-        Combination combination = new Combination();
+    public static void main(String[] args) throws IOException, ParseException {  
+        
         Card cardinfo = new Card("Citi Prestige",  "Master",  "Citi",  6,  5,  "/a fake path");
         String origQuery = "prestige";
-        combination.ReturnAll(cardinfo, origQuery, 10);
-        Card DreamCard = combination.getCard();
-        System.out.println("card info:" + DreamCard.getIssuer() + DreamCard.getName());
-        List<Document> docList = combination.getDocList();
+        
+        Combination combination = new Combination(cardinfo, origQuery);
+        
+        Card newCard = combination.ReturnCard();       
+        System.out.println("card info:" + newCard.getIssuer() + newCard.getName());
+        
+        List<Document> docList = combination.retrieveDocList(10);
         
         for(Document doc :docList){
             System.out.println("content--\tname:\t" + doc.get("link") + "\tcontent:\t" + doc.get("content"));  
-        }
-        
-        
-//        for (int i = 0; i <doc.size(); i++) {  
-//                    
-//                    System.out.println("the No.   " + (i + 1) + "has content--\tname:\t" + doc.get("link") + "\tcontent:\t" + doc.get("content"));  
-//                }
-        
-        
+        }    
        
     }
 }

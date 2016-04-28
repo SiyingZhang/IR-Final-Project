@@ -105,12 +105,15 @@ public class CardDao {
 
 //            scoreListSorted = scoreList;
 //           Collections.sort(scoreListSorted);
-            double maxScore = Collections.max(scoreList);
-            int i = scoreList.indexOf(maxScore);
-
-            returnCard = cardList.get(i);
+            
 
         }
+        double maxScore = Collections.max(scoreList);
+        int i = scoreList.indexOf(maxScore);
+
+        returnCard = cardList.get(i);
+       
+        //returnCard = 
         return returnCard;
     }
 }

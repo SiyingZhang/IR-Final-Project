@@ -11,7 +11,7 @@ package model;
  */
 public class Path {
 
-    public static String DataDir = "C:\\Users\\Zhirun Tian\\Documents\\GitHub\\CardRecommondation\\data\\docset";//address of docset.trectext
-    public static String IndexDir = "c://study/index/testindex";//address of generated Web index file
+    public static String DataDir = "/Users/siying/Documents/pro/eclipseWorkspace/CreditCardRecommendation/data/docset.trecweb";//address of docset.trectext
+    public static String IndexDir = "/Users/siying/Documents/pro/eclipseWorkspace/CreditCardRecommendation/data/testindex";//address of generated Web index file
 
 }

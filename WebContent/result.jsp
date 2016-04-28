@@ -27,19 +27,22 @@
 	<!-- //radio-buttons -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<%@page import="java.util.HashMap" %>
+	<%@page import="java.util.ArrayList" %>
+	<%@page import="java.util.List"%>
+	<%@page import="java.util.Set"%>
+	<%@page import="org.json.*"%>
 	<%
 		String queryText = (String)request.getAttribute("query_text");
 		String bankName = (String)request.getAttribute("bank_name");
 		String cardName = (String)request.getAttribute("card_name");
-		String bonus = (String)request.getAttribute("bonus");				
+		double bonus = (double)request.getAttribute("bonus");
+		
+		HashMap<String, String> map = (HashMap)request.getSession().getAttribute("result");
 	%>
 </head>
 	
 <body>
-<%@page import="java.util.HashMap" %>
-<%@page import="java.util.ArrayList" %>
-<%@page import="java.util.List"%>
-<%@page import="org.json.*"%>
 	<div class="main-container">
 		<!-- Heading -->
 		<div class="heading">
@@ -63,17 +66,11 @@
 		<div class="link-group">
 			<h4>Related Links</h4>
 			<%
-			if(request.getAttribute("result") != null) {
-				String res = (String)request.getAttribute("result");
-				JSONArray jsonArray = new JSONArray(res);
-				
-				for(int i=0; i<jsonArray.length(); i++) {
-					JSONObject jsonObject = jsonArray.getJSONObject(i);
-					out.println("----" + (i+1) + "----");
-					//String link = "LINK: " +jsonObject.getString("link");
-					out.println("<a href='"+ jsonObject.getString("link") + "' target='_blank'>" + jsonObject.getString("link")+ "</a>");
-					out.println("<p>"+ "Content: " + jsonObject.getString("content") + "</p>");
-				}
+			int count = 1;
+			for(String s : map.keySet()) {
+				out.println("----" + count + "----");
+				out.println("<a href='"+ s + "' target='_blank'>" + s + "</a>");
+				out.println("<p>"+ "Content: " + map.get(s) + "</p>");
 			}
 			%>
 		</div>
@@ -81,7 +78,6 @@
 
 	<div class="footer-bottom">
 		<p>Copyright © 2016 Developed by Zhirun Tian, Chenlei Zhao, Siying Zhang| Template by <a href="http://w3layouts.com">W3layouts</a></p>					
-	</div>
 	</div>
 </body>
 

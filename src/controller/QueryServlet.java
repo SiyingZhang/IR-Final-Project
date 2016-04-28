@@ -11,13 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Card;
 import model.Combination;
-import model.WebDocument;
 
 import org.apache.lucene.document.Document;
-import org.json.JSONArray;
 
 /**
  * Servlet implementation class CardRecommendation
@@ -65,7 +64,7 @@ public class QueryServlet extends HttpServlet {
 		}
     	
     	if(request.getParameter("monthly_spend") == null) {
-    		bonus=1;
+    		bonus = 1;
     	} else {
     		monthSpend = request.getParameter("monthly_spend");
     		bonus = Integer.parseInt(monthSpend); 
@@ -88,16 +87,18 @@ public class QueryServlet extends HttpServlet {
 
     	//Get the entire query content, add space between each two
     	String queryContent = query +" "+ difficulty +" "+ bonus +" "+ network +" "+ issuer;
-    	System.out.println("Query is: " + queryText);
+    	System.out.println("Query is: " + queryContent);
     	
     	request.setAttribute("query_text", queryText);	//pass query on result page
     	
-    	Combination combination = new Combination();
         Card cardinfo = new Card("",  network,  issuer,  bonus,  difficulty, "/a fake path");
-       
-        combination.ReturnAll(cardinfo, queryContent, 10);
-        Card DreamCard = combination.getCard();
         
+        //Initiate combination
+        Combination combination = new Combination(cardinfo, queryContent);
+        
+        //Get the recommendation card
+        Card DreamCard = combination.ReturnCard();
+
         //Pass card info into result jsp
         request.setAttribute("bank_name", DreamCard.getIssuer());
         request.setAttribute("card_name", DreamCard.getNetwork());
@@ -105,26 +106,26 @@ public class QueryServlet extends HttpServlet {
         
         request.setAttribute("path", DreamCard.getPath());
         
-        System.out.println("card info:" + DreamCard.getIssuer() + DreamCard.getName());
+        System.out.println("card info:" + DreamCard.getIssuer() + DreamCard.getNetwork());
         
-        List<Document> docList = combination.getDocList();
-        List<HashMap<String, String>> result = new ArrayList<>();
-        int count = 0;
+        //Retrieve doc list
+        List<Document> documentList = new ArrayList<Document>();
+        documentList = combination.retrieveDocList(10);
         
-        for(Document doc :docList){
-        	map.put(count++, doc);
+        HashMap<String, String> linkContent = new HashMap<>(); // link->content
+        
+        for(Document doc : documentList){
         	
-        	HashMap<String, String> map = new HashMap<>();
-        	map.put("link", doc.get("link"));
-        	map.put("content", doc.get("content"));
-            System.out.println("content--\tname:\t" + doc.get("link") + "\tcontent:\t" + doc.get("content"));  
+        	System.out.println("content--\tname:\t" + doc.get("link") + "\tcontent:\t" + doc.get("content"));  
             
-            result.add(map);
-            
+        	linkContent.put(doc.get("link"), doc.get("content"));            
         }
-    	
-    	JSONArray json = new JSONArray(result);
-    	request.setAttribute("result", json.toString());
+        
+        //pass link->content into result jsp page
+        HttpSession session = request.getSession();
+        session.setAttribute("result", linkContent);
+
+        //request.setAttribute("result", linkContent);
     	//Transfer data into result page.
     	getServletContext().getRequestDispatcher("/result.jsp").forward(request, response);
     }
@@ -154,5 +155,45 @@ public class QueryServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+//	public Card GetDreamCard(Card card) {
+//
+//        int test = 5;
+//        Card returnCard = new Card();
+//        CardDao carddao = new CardDao();
+//        List<Card> cardList = carddao.GetCardListFromDB();
+//        List<Double> scoreList = new ArrayList<Double>();
+//        List<Double> scoreListSorted = new ArrayList<Double>();
+////        Map<Integer, Double> mapScore = new HashMap<Integer, Double>();
+////        Map<Integer, Double> mapScoreSorted = new HashMap<Integer, Double>();
+//        for (Card tempCard : cardList) {
+//            double score = 0;
+//            //weigth of bonus
+//            double bonusWeight = 0.5;
+//            //weight of difficulty
+//            double difficultyWeight = 0.5;
+//
+//            if ((card.getIssuer() == tempCard.getIssuer()) && (card.getNetwork() == tempCard.getNetwork())) {
+//                score = bonusWeight * abs(card.getBouns() - tempCard.getBouns()) + difficultyWeight * abs(card.getDifficulty() - tempCard.getDifficulty());
+//                //mapScore.put(cardList.indexOf(tempCard), score);
+//                scoreList.add(score);
+//            } else {
+//                scoreList.add(0.01);
+//            }
+//
+////            scoreListSorted = scoreList;
+////           Collections.sort(scoreListSorted);
+//            
+//
+//        }
+//        double maxScore = Collections.max(scoreList);
+//        int i = scoreList.indexOf(maxScore);
+//
+//        returnCard = cardList.get(i);
+//       
+//        //returnCard = 
+//        return returnCard;
+//    }
+//	
 
 }
