@@ -18,6 +18,8 @@ import model.Combination;
 
 import org.apache.lucene.document.Document;
 
+import dataAccesObject.CardDao;
+
 /**
  * Servlet implementation class CardRecommendation
  */
@@ -93,16 +95,20 @@ public class QueryServlet extends HttpServlet {
     	
         Card cardinfo = new Card("",  network,  issuer,  bonus,  difficulty, "/a fake path");
         
+        CardDao cardDao = new CardDao();
+        Card DreamCard = cardDao.GetDreamCard(cardinfo);
+        
         //Initiate combination
         Combination combination = new Combination(cardinfo, queryContent);
         
         //Get the recommendation card
-        Card DreamCard = combination.ReturnCard();
+        //Card DreamCard = combination.ReturnCard();
 
         //Pass card info into result jsp
         request.setAttribute("bank_name", DreamCard.getIssuer());
-        request.setAttribute("card_name", DreamCard.getNetwork());
+        request.setAttribute("card_name", DreamCard.getName());
         request.setAttribute("bonus", DreamCard.getBouns());
+        request.setAttribute("path", DreamCard.getPath());
         
         request.setAttribute("path", DreamCard.getPath());
         
@@ -111,19 +117,16 @@ public class QueryServlet extends HttpServlet {
         //Retrieve doc list
         List<Document> documentList = new ArrayList<Document>();
         documentList = combination.retrieveDocList(10);
-        
-        HashMap<String, String> linkContent = new HashMap<>(); // link->content
-        
+
         for(Document doc : documentList){
         	
-        	System.out.println("content--\tname:\t" + doc.get("link") + "\tcontent:\t" + doc.get("content"));  
-            
-        	linkContent.put(doc.get("link"), doc.get("content"));            
+        	System.out.println("content--\tname: " + doc.get("title") + "====" + doc.get("link") + "\tAbstract:\t" + doc.get("abstract"));  
+                       
         }
         
         //pass link->content into result jsp page
         HttpSession session = request.getSession();
-        session.setAttribute("result", linkContent);
+        session.setAttribute("result", documentList);
 
         //request.setAttribute("result", linkContent);
     	//Transfer data into result page.
@@ -155,45 +158,5 @@ public class QueryServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-//	public Card GetDreamCard(Card card) {
-//
-//        int test = 5;
-//        Card returnCard = new Card();
-//        CardDao carddao = new CardDao();
-//        List<Card> cardList = carddao.GetCardListFromDB();
-//        List<Double> scoreList = new ArrayList<Double>();
-//        List<Double> scoreListSorted = new ArrayList<Double>();
-////        Map<Integer, Double> mapScore = new HashMap<Integer, Double>();
-////        Map<Integer, Double> mapScoreSorted = new HashMap<Integer, Double>();
-//        for (Card tempCard : cardList) {
-//            double score = 0;
-//            //weigth of bonus
-//            double bonusWeight = 0.5;
-//            //weight of difficulty
-//            double difficultyWeight = 0.5;
-//
-//            if ((card.getIssuer() == tempCard.getIssuer()) && (card.getNetwork() == tempCard.getNetwork())) {
-//                score = bonusWeight * abs(card.getBouns() - tempCard.getBouns()) + difficultyWeight * abs(card.getDifficulty() - tempCard.getDifficulty());
-//                //mapScore.put(cardList.indexOf(tempCard), score);
-//                scoreList.add(score);
-//            } else {
-//                scoreList.add(0.01);
-//            }
-//
-////            scoreListSorted = scoreList;
-////           Collections.sort(scoreListSorted);
-//            
-//
-//        }
-//        double maxScore = Collections.max(scoreList);
-//        int i = scoreList.indexOf(maxScore);
-//
-//        returnCard = cardList.get(i);
-//       
-//        //returnCard = 
-//        return returnCard;
-//    }
-//	
 
 }

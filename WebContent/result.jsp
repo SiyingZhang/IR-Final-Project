@@ -22,9 +22,6 @@
 	<!-- js -->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<!-- //js -->
-	<!-- radio-buttons -->
-	<link rel="stylesheet" href="css/sky-forms.css">
-	<!-- //radio-buttons -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<%@page import="java.util.HashMap" %>
@@ -32,13 +29,37 @@
 	<%@page import="java.util.List"%>
 	<%@page import="java.util.Set"%>
 	<%@page import="org.json.*"%>
+	<%@page import="org.apache.lucene.document.Document" %>
 	<%
 		String queryText = (String)request.getAttribute("query_text");
-		String bankName = (String)request.getAttribute("bank_name");
-		String cardName = (String)request.getAttribute("card_name");
-		double bonus = (double)request.getAttribute("bonus");
+		if(queryText == null){
+			queryText = "";
+		}
 		
-		HashMap<String, String> map = (HashMap)request.getSession().getAttribute("result");
+		String bankName = (String)request.getAttribute("bank_name");
+		if(bankName == null){
+			bankName = "AE";
+		}
+		
+		String cardName = (String)request.getAttribute("card_name");
+		if(cardName == null){
+			cardName = "AE";
+		}
+		
+		String cardImg = (String)request.getAttribute("path");
+		if(cardImg == null){
+			cardImg = "/3.png";
+		}
+		
+		double bonus = (double)request.getAttribute("bonus");
+		if(request.getAttribute("bonus") == null){
+			bonus = 6;
+		}
+		
+		List<Document> docList = (ArrayList)request.getSession().getAttribute("result");
+		/* if(request.getSession().getAttribute("result") == null){
+			System.out.println("result is null");
+		} */
 	%>
 </head>
 	
@@ -48,36 +69,38 @@
 		<div class="heading">
 			<h3>Credit Card Recommendation</h3>
 		</div>
-		<p class="tag">Your Query: </p><p class="text-body"><%=queryText %>></p>
 		<!-- whole container-->
-		<hr>
+		
 		<div class="one-item">
-			<div class="card-image"><img src="images/citi-prestige-card.png"></div>
+			<p class="tag">Your Query: </p><p class="text-body"><%=queryText %></p>
+			<hr>
+			<div class="card-image"><img src="images/<%=cardImg %>"></div>
 			<div class="information">
-				<p class="tag">Bank Name: </p><p class="text-body"><%=bankName%></p>
+				<p class="tag">Bank Name: </p><p class="text-body"><%=bankName %></p>
 				<br>
-				<p class="tag">Card Name: </p><p class="text-body"><%=cardName%></p>
+				<p class="tag">Card Name: </p><p class="text-body"><%=cardName %></p>
 				<br>
-				<p class="tag">Bonus: </p><p class="text-body"><%=bonus%></p>
+				<p class="tag">Bonus: </p><p class="text-body"><%=bonus %></p>
 			</div>
 		</div>
-		<hr>
 
 		<div class="link-group">
+			<hr>
 			<h4>Related Links</h4>
 			<%
 			int count = 1;
-			for(String s : map.keySet()) {
-				out.println("----" + count + "----");
-				out.println("<a href='"+ s + "' target='_blank'>" + s + "</a>");
-				out.println("<p>"+ "Content: " + map.get(s) + "</p>");
+			for(Document d : docList) {
+				out.println("<p>----------------" + count + "----------------</p><br>");
+				out.println("<a href='"+ d.get("link") + "' target='_blank'>" + d.get("title") + "</a><br>");
+				out.println("<p>"+ "Abstract: " + d.get("abstract") + "</p><br>");
+				count++;
 			}
 			%>
 		</div>
 	</div>
 
 	<div class="footer-bottom">
-		<p>Copyright © 2016 Developed by Zhirun Tian, Chenlei Zhao, Siying Zhang| Template by <a href="http://w3layouts.com">W3layouts</a></p>					
+		<p>Copyright © 2016 Developed by Zhirun Tian, Chenlei Zhao, Siying Zhang | Template by <a href="http://w3layouts.com">W3layouts</a></p>					
 	</div>
 </body>
 

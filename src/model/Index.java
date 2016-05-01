@@ -53,8 +53,15 @@ public class Index {
         WebDocument tempDoc = null;
         while ((tempDoc = getDoc.nextDocument()) != null) {
             Document doc = new Document();
+            System.out.println("link==============="+tempDoc.getDocLink());
+            //System.out.println(tempDoc.getDocContent());
+            System.out.println("title========"+tempDoc.getDocTitle());
+            System.out.println("abstract========"+tempDoc.getDocAbstract());
             doc.add(new TextField("link", tempDoc.getDocLink(), Store.YES));
             doc.add(new TextField("content", tempDoc.getDocContent(), Store.YES));
+            doc.add(new TextField("title", tempDoc.getDocTitle(), Store.YES));
+            doc.add(new TextField("abstract", tempDoc.getDocAbstract(), Store.YES));
+            
             try {
                 //write doc into index  
                 indexWrite.addDocument(doc);

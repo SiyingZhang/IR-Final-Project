@@ -20,7 +20,7 @@ import org.apache.lucene.queryparser.classic.ParseException;
 public class Demo {
     public static void main(String[] args) throws IOException, ParseException {  
         
-        Card cardinfo = new Card("Citi Prestige",  "Master",  "Citi",  6,  5,  "/a fake path");
+        Card cardinfo = new Card("Citi Prestige",  "AE",  "AE",  6,  5,  "/a fake path");
         String origQuery = "prestige";
         
         Combination combination = new Combination(cardinfo, origQuery);

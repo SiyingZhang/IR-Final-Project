@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.*;
 
 import model.Card;
-import model.MapUtil;
 
 import dbConnect.DbConnection;
 import static java.lang.Math.abs;
@@ -19,14 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import java.lang.reflect.Type;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  *
@@ -35,7 +27,6 @@ import java.util.TreeMap;
 public class CardDao {
 
     private Connection connection;
-    private String nonceval = "";
     Statement st = null;
     ResultSet rs = null;
 
@@ -56,9 +47,11 @@ public class CardDao {
             //ps.setString(1, nonceval);
             rs = ps.executeQuery();
 
-            Card card = new Card();
+            
 
             while (rs.next()) {
+                //System.out.println(rs.getString("name"));
+                Card card = new Card();
                 card.setName(rs.getString("name"));
                 card.setIssuer(rs.getString("issuer"));
                 card.setNetwork(rs.getString("network"));
@@ -69,6 +62,8 @@ public class CardDao {
 
                 cardList.add(card);
             }
+            
+      
 
             rs.close();
 
@@ -81,7 +76,7 @@ public class CardDao {
 
     public Card GetDreamCard(Card card) {
 
-        int test = 5;
+//        int test = 5;
         Card returnCard = new Card();
         List<Card> cardList = GetCardListFromDB();
         List<Double> scoreList = new ArrayList<Double>();
@@ -95,25 +90,25 @@ public class CardDao {
             //weight of difficulty
             double difficultyWeight = 0.5;
 
-            if ((card.getIssuer() == tempCard.getIssuer()) && (card.getNetwork() == tempCard.getNetwork())) {
+            
+            Boolean i = card.getIssuer().equalsIgnoreCase(tempCard.getIssuer());
+            Boolean j = card.getNetwork().equalsIgnoreCase(tempCard.getNetwork());
+            
+            if (card.getIssuer().equalsIgnoreCase(tempCard.getIssuer()) && card.getNetwork().equalsIgnoreCase(tempCard.getNetwork())) {
                 score = bonusWeight * abs(card.getBouns() - tempCard.getBouns()) + difficultyWeight * abs(card.getDifficulty() - tempCard.getDifficulty());
                 //mapScore.put(cardList.indexOf(tempCard), score);
                 scoreList.add(score);
             } else {
                 scoreList.add(0.01);
             }
-
+        }
 //            scoreListSorted = scoreList;
 //           Collections.sort(scoreListSorted);
-            
-
-        }
         double maxScore = Collections.max(scoreList);
         int i = scoreList.indexOf(maxScore);
 
         returnCard = cardList.get(i);
-       
-        //returnCard = 
+
         return returnCard;
     }
 }

@@ -15,15 +15,39 @@ public class WebDocument {
     private String DocTitle;
     private String DocLink;
     private String DocContent;
+    private String DocAbstract;
 
-    public WebDocument(long DocNo, String DocTitle, String DocLink, String DocContent) {
+    public WebDocument(long DocNo, String DocTitle, String DocLink, String DocContent, String DocAbstract) {
         this.DocNo = DocNo;
         this.DocTitle = DocTitle;
         this.DocLink = DocLink;
         this.DocContent = DocContent;
+        this.DocAbstract = DocAbstract;
+    }
+    
+    public WebDocument( String DocTitle, String DocLink, String DocContent, String DocAbstract) {
+        this.DocNo = 0;
+        this.DocTitle = DocTitle;
+        this.DocLink = DocLink;
+        this.DocContent = DocContent;
+        this.DocAbstract = DocAbstract;
     }
 
-    public WebDocument(String DocLink, String DocContent) {
+    /**
+	 * @return the docAbstract
+	 */
+	public String getDocAbstract() {
+		return DocAbstract;
+	}
+
+	/**
+	 * @param docAbstract the docAbstract to set
+	 */
+	public void setDocAbstract(String docAbstract) {
+		DocAbstract = docAbstract;
+	}
+
+	public WebDocument(String DocLink, String DocContent) {
 
         this.DocLink = DocLink;
         this.DocContent = DocContent;

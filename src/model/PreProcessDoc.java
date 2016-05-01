@@ -23,7 +23,10 @@ public class PreProcessDoc {
     FileInputStream fis = null;
     BufferedReader reader = null;
     String line;
-    String subs;
+    String docLink;
+    String docTitle;
+    String docAbstract;
+    
 
     public PreProcessDoc() throws FileNotFoundException {
         fis = new FileInputStream(Path.DataDir);
@@ -37,7 +40,12 @@ public class PreProcessDoc {
             if (line.equals("<DOC>")) {
                 line = reader.readLine();
                 //get the doc number
-                subs = line.substring(7, (line.length() - 8));
+                docLink = line.substring(7, (line.length() - 8));
+                line = reader.readLine();
+                docTitle = line.substring(8, (line.length() - 9));
+                line = reader.readLine();
+                docAbstract = line.substring(11, (line.length() - 12));
+                
 
             } else {
                 //if(line.equals("<p>") ){
@@ -45,13 +53,17 @@ public class PreProcessDoc {
                 StringBuilder stringBuilder = new StringBuilder();
                 //String temp = reader.readLine();
                 //System.out.println("+++++++++"+ temp);
-                int count = 0;
-
-                String tempString = reader.readLine();
-                if (tempString.equals(null)) {
-                    continue;
-                }
-
+//                int count = 0;
+//
+//                String tempString = reader.readLine();
+////                if (tempString.equals(null)) {
+////                    continue;
+////                }
+//                
+//                line = reader.readLine();
+//                if (line == null) {
+//                    break;
+                    
                 while (!(line.contains("</DOC>"))) {
                     stringBuilder.append(line);
 
@@ -59,7 +71,7 @@ public class PreProcessDoc {
                     if (line == null) {
                         break;
                     }
-                    count++;
+//                    count++;
                     //System.out.println("count "+ count+"+++++++++"+ temp);
                 }
                 //combine the lines to a string
@@ -67,7 +79,11 @@ public class PreProcessDoc {
                 //return the map
 //                Map<String, Object> rstPair = new HashMap<String, Object>();
 //                rstPair.put(subs, result.toCharArray());
-                WebDocument doc = new WebDocument(subs, result);
+                docTitle = docTitle.substring(2,docTitle.length()-2);
+                docLink = docLink.substring(2,docLink.length()-2);
+                docAbstract = docAbstract.substring(2,docAbstract.length()-2);
+                
+                WebDocument doc = new WebDocument(docTitle, docLink, result, docAbstract);
                 return doc;
 
             }

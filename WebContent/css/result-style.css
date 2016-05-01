@@ -52,7 +52,8 @@ hr{
 	margin: auto;
 	width: 70%;
 	padding-top: 2em;
-	height: 180px;
+	padding-bottom: 5em;
+	/*height: 180px;*/
 }
 .card-image{
 	overflow: hidden;
@@ -73,6 +74,7 @@ img{
 }
 a, h4{
 	line-height: 200%;
+	font-style: bold;
 }
 /*-- footer --*/
 .footer-bottom{
